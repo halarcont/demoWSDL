@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/clientDemo/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="clientDemo" targetNamespace="http://www.example.org/clientDemo/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/clientDemo/">
+      <xsd:element name="ClientRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="lastName" type="xsd:string"/>
+            <xsd:element name="telephoneNumber" type="xsd:double"/>
+            <xsd:element name="address" type="xsd:string"/>
+            <xsd:element name="email" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ClientResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="fullName" type="xsd:string"/>
+            <xsd:element name="personalData" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetClientRequest">
+    <wsdl:part element="tns:ClientRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="GetClientResponse">
+    <wsdl:part element="tns:ClientResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="clientDemo">
+    <wsdl:operation name="getData">
+      <wsdl:input message="tns:GetClientRequest"/>
+      <wsdl:output message="tns:GetClientResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="clientDemoSOAP" type="tns:clientDemo">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getData">
+      <soap:operation soapAction="http://www.example.org/clientDemo/getData"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="clientDemo">
+    <wsdl:port binding="tns:clientDemoSOAP" name="clientDemoSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
