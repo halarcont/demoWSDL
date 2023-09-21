@@ -24,14 +24,12 @@ public class GetDataRouteRest extends RouteBuilder {
 
         from("direct:clientInfo")
                 .routeId("direct:clientInfo").noMessageHistory().noTracing().noStreamCaching()
-                .log("${body}")
-                .convertBodyTo(String.class)
                 .unmarshal().json(JsonLibrary.Jackson, ClientRequest.class)
                 .setBody(exchange -> {
                     ClientRequest clientRequest = exchange.getIn().getBody(ClientRequest.class);
                     ClientResponse clientResponse = new ClientResponse();
                     clientResponse.setFullName(clientRequest.getName() + " " + clientRequest.getLastName());
-                    clientResponse.setPersonalData(clientRequest.getTelephoneNumber() + " " + clientRequest.getAddress() + " " + clientRequest.getEmail());
+                    clientResponse.setPersonalData("Telefono: " + clientRequest.getTelephoneNumber() + " " + "Address: " + clientRequest.getAddress() + " " + "Email: "  + clientRequest.getEmail());
                     return clientResponse;
                 })
                 .marshal().json(JsonLibrary.Jackson, ClientResponse.class);

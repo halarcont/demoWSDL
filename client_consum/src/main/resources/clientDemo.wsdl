@@ -7,7 +7,7 @@
           <xsd:sequence>
             <xsd:element name="name" type="xsd:string"/>
             <xsd:element name="lastName" type="xsd:string"/>
-            <xsd:element name="telephoneNumber" type="xsd:double"/>
+            <xsd:element name="telephoneNumber" type="xsd:string"/>
             <xsd:element name="address" type="xsd:string"/>
             <xsd:element name="email" type="xsd:string"/>
           </xsd:sequence>
