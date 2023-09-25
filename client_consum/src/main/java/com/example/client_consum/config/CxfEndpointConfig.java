@@ -14,7 +14,6 @@ public class CxfEndpointConfig {
     @Bean("endpointClientSoap")
     public CxfEndpoint wsClientSoap(){
         CxfEndpoint cxfEndpoint = new CxfEndpoint();
-//        cxfEndpoint.setWsdlURL("clientDemo.wsdl");
         cxfEndpoint.setServiceClass(ClientDemo.class);
         cxfEndpoint.setAddress("/WSClient");
         cxfEndpoint.setProperties(new HashMap<>());
